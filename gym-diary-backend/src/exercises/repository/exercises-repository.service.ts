@@ -10,4 +10,7 @@ export abstract class ExerciseRepositoryService {
     pageSize?: string,
   ): Observable<ExercisesAPI>;
   abstract getOne(id: string): Observable<Exercise>;
+  abstract insert(exercise: Exercise): Observable<Exercise>;
+  abstract update(id: string, exercise: Exercise): Observable<Exercise>;
+  abstract delete(id: string): boolean;
 }

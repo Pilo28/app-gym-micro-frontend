@@ -32,8 +32,10 @@ export function getCollection(
   search?: string,
   page?: string,
   pageSize?: string,
+  reverse?: boolean,
 ): Collection {
   let filteredItems = filter(items, search);
+  if (reverse) filteredItems = reverseCollection(filteredItems);
 
   filteredItems = paginate(
     filteredItems,
@@ -49,4 +51,8 @@ export function getCollection(
 
 function filter(items: Items, search?: string) {
   return search ? filterByAll(search, items) : items;
+}
+
+function reverseCollection(items: Items) {
+  return [...items].reverse();
 }

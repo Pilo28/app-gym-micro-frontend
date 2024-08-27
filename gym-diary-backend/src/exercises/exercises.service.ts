@@ -18,4 +18,16 @@ export class ExercisesService {
   getOne(id: string): Observable<Exercise> {
     return this.exerciseRepositoryService.getOne(id);
   }
+
+  insert(exercise: Exercise) {
+    return this.exerciseRepositoryService.insert(exercise);
+  }
+
+  delete(id: string) {
+    return this.exerciseRepositoryService.delete(id);
+  }
+
+  update(id: string, exercise: Exercise) {
+    return this.exerciseRepositoryService.update(id, exercise);
+  }
 }

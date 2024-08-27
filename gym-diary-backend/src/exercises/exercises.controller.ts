@@ -1,4 +1,13 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiQuery, ApiParam } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { QueryApi, ParamQueryId } from 'src/utils/interfaces/query.interface';
@@ -32,5 +41,34 @@ export class ExercisesController {
   @Public()
   getOne(@Param() params: ParamQueryId): Observable<Exercise> {
     return this.exercisesService.getOne(params['id']);
+  }
+
+  @ApiResponse({ status: 201, type: CreateExercisesDto })
+  @Post()
+  @Public()
+  insert(@Body() newExercise: CreateExercisesDto): Observable<Exercise> {
+    return this.exercisesService.insert(newExercise);
+  }
+
+  @ApiResponse({ status: 200, type: CreateExercisesDto })
+  @ApiParam({ name: 'id' })
+  @Put(':id')
+  @Public()
+  update(
+    @Param() params: ParamQueryId,
+    @Body() newExercise: CreateExercisesDto,
+  ): Observable<Exercise> {
+    return this.exercisesService.update(params['id'], newExercise);
+  }
+
+  @ApiResponse({ status: 200, type: CreateExercisesDto })
+  @ApiParam({ name: 'id' })
+  @Delete(':id')
+  @Public()
+  delete(
+    @Param() params: ParamQueryId,
+    @Body() newExercise: CreateExercisesDto,
+  ): boolean {
+    return this.exercisesService.delete(params['id']);
   }
 }
